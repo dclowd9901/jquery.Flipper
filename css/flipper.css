@@ -1,0 +1,248 @@
+
+.flipper-container {
+	float: left;
+	margin-right: 2px;
+}
+
+.flipper-container .top .panel,
+.flipper-container .bottom .panel,
+.flipper-container .top .stationary-panel,
+.flipper-container .bottom .stationary-panel {
+	background: #4c4c4c; /* Old browsers */
+	background: -moz-linear-gradient(top,  #4c4c4c 0%, #2d2d2d 12%, #474747 43%, #3d3d3d 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4c4c4c), color-stop(12%,#2d2d2d), color-stop(43%,#474747), color-stop(100%,#3d3d3d)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #4c4c4c 0%,#2d2d2d 12%,#474747 43%,#3d3d3d 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #4c4c4c 0%,#2d2d2d 12%,#474747 43%,#3d3d3d 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #4c4c4c 0%,#2d2d2d 12%,#474747 43%,#3d3d3d 100%); /* IE10+ */
+	background: linear-gradient(top,  #4c4c4c 0%,#2d2d2d 12%,#474747 43%,#3d3d3d 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#3d3d3d',GradientType=0 ); /* IE6-9 */
+	overflow: hidden;
+	position: relative;
+	padding: 0 10px;
+}
+
+.flipper-container .top .stationary-panel,
+.flipper-container .bottom .stationary-panel {
+	position: absolute;
+}
+
+.flipper-container .top .panel,
+.flipper-container .top .stationary-panel {
+	-moz-border-radius-topleft: 10%;
+	-moz-border-radius-topright: 10%;
+	-moz-border-radius-bottomright: 0;
+	-moz-border-radius-bottomleft: 0;
+	-webkit-border-radius: 10% 10% 0 0;
+	border-radius: 10% 10% 0 0;
+	border-top: 1px solid #aaa;
+	border-bottom: 2px solid #333;
+	-webkit-transform: rotateX(0);
+	-webkit-transform-origin: 0;
+	-webkit-transform-origin-x: 0;
+	-webkit-transform-origin-y: 100%;	
+}
+
+.flipper-container .bottom .panel,
+.flipper-container .bottom .stationary-panel {
+	background: #2d2d2d; /* Old browsers */
+	background: -moz-linear-gradient(top,  #2d2d2d 0%, #474747 12%, #3d3d3d 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#2d2d2d), color-stop(12%,#474747), color-stop(100%,#3d3d3d)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #2d2d2d 0%,#474747 12%,#3d3d3d 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #2d2d2d 0%,#474747 12%,#3d3d3d 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #2d2d2d 0%,#474747 12%,#3d3d3d 100%); /* IE10+ */
+	background: linear-gradient(top,  #2d2d2d 0%,#474747 12%,#3d3d3d 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2d2d2d', endColorstr='#3d3d3d',GradientType=0 ); /* IE6-9 */
+	-moz-border-radius-topleft: 0;
+	-moz-border-radius-topright: 0;
+	-moz-border-radius-bottomright: 10%;
+	-moz-border-radius-bottomleft: 10%;
+	-webkit-border-radius: 0 0 10% 10%;
+	border-radius: 0 0 10% 10%;
+	border-bottom: 2px solid #000;
+	-webkit-transform: rotateX(0);
+	-webkit-transform-origin: 100% 0;
+	-webkit-transform-origin-x: -100%;
+	-webkit-transform-origin-y: 0px;		
+}
+
+.flipper-container .top .panel,
+.flipper-container .bottom .panel {
+	opacity: 0;
+}
+
+.flipper-container .top .panel.topFlipDown {
+	opacity: 1;
+	-webkit-animation-duration: 50ms;
+	-webkit-animation-name: topFlipDown;
+	-webkit-animation-timing-function: ease-in;
+	-moz-animation-duration: 50ms;
+	-moz-animation-name: topFlipDown;
+	-moz-animation-timing-function: ease-in;
+	animation-duration: 50ms;
+	animation-name: topFlipDown;
+	animation-timing-function: ease-in;
+}
+
+@-webkit-keyframes topFlipDown {
+	from {
+		-webkit-transform: rotateX(0deg);
+	}
+	to {
+		-webkit-transform: rotateX(-90deg);
+	}
+}
+
+@-moz-keyframes topFlipDown {
+	from {
+		-moz-transform: rotateX(0deg);
+	}
+	to {
+		-moz-transform: rotateX(-90deg);
+	}
+}
+
+@keyframes topFlipDown {
+	from {
+		transform: rotateX(0deg);
+	}
+	to {
+		transform: rotateX(-90deg);
+	}
+}
+
+.flipper-container .bottom .panel.bottomFlipDown {
+	opacity: 1;
+	-webkit-animation-duration: 50ms;
+	-webkit-animation-name: bottomFlipDown;
+	-webkit-animation-timing-function: linear;
+	-moz-animation-duration: 50ms;
+	-moz-animation-name: bottomFlipDown;
+	-moz-animation-timing-function: linear;
+	animation-duration: 50ms;
+	animation-name: bottomFlipDown;
+	animation-timing-function: linear;
+}
+
+@-webkit-keyframes bottomFlipDown {
+	from {
+		-webkit-transform: rotateX(90deg);
+	}
+	to {
+		-webkit-transform: rotateX(0deg);
+	}
+}
+
+@-moz-keyframes bottomFlipDown {
+	from {
+		-moz-transform: rotateX(90deg);
+	}
+	to {
+		-moz-transform: rotateX(0deg);
+	}
+}
+
+@keyframes bottomFlipDown {
+	from {
+		-moz-transform: rotateX(90deg);
+	}
+	to {
+		-moz-transform: rotateX(0deg);
+	}
+}
+
+.flipper-container .bottom .panel.bottomFlipUp {
+	opacity: 1;
+	-webkit-animation-duration: 50ms;
+	-webkit-animation-name: bottomFlipUp;
+	-webkit-animation-timing-function: ease-in;
+	-moz-animation-duration: 50ms;
+	-moz-animation-name: bottomFlipUp;
+	-moz-animation-timing-function: ease-in;
+	animation-duration: 50ms;
+	animation-name: bottomFlipUp;
+	animation-timing-function: ease-in;
+}
+
+@-webkit-keyframes bottomFlipUp {
+	from {
+		-webkit-transform: rotateX(0deg);
+	}
+	to {
+		-webkit-transform: rotateX(90deg);
+	}
+}
+
+@-moz-keyframes bottomFlipUp {
+	from {
+		-moz-transform: rotateX(0deg);
+	}
+	to {
+		-moz-transform: rotateX(90deg);
+	}
+}
+
+@keyframes bottomFlipUp {
+	from {
+		transform: rotateX(0deg);
+	}
+	to {
+		transform: rotateX(90deg);
+	}
+}
+.flipper-container .top .panel.topFlipUp {
+	opacity: 1;
+	-webkit-animation-duration: 50ms;
+	-webkit-animation-name: topFlipUp;
+	-webkit-animation-timing-function: linear;
+	-moz-animation-duration: 50ms;
+	-moz-animation-name: topFlipUp;
+	-moz-animation-timing-function: linear;
+	animation-duration: 50ms;
+	animation-name: topFlipUp;
+	animation-timing-function: linear;
+}
+
+@-webkit-keyframes topFlipUp {
+	from {
+		-webkit-transform: rotateX(-90deg);
+	}
+	to {
+		-webkit-transform: rotateX(0deg);
+	}
+}
+
+@-moz-keyframes topFlipUp {
+	from {
+		-webkit-transform: rotateX(-90deg);
+	}
+	to {
+		-webkit-transform: rotateX(0deg);
+	}
+}
+
+@keyframes topFlipUp {
+	from {
+		-webkit-transform: rotateX(-90deg);
+	}
+	to {
+		-webkit-transform: rotateX(0deg);
+	}
+}
+
+.flipper-container .stationary-panel span,
+.flipper-container .panel span {
+	color: #ddd;
+	font-family: 'Helvetica', 'Arial', 'sans-serif';
+	position: relative;
+	text-align: center;
+	display: block;
+}
+
+.pers-wrapper {
+	-webkit-perspective: 800;
+}
+
+.panel-row {
+	overflow: auto;
+	clear: both;
+}
