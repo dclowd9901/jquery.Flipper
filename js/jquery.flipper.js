@@ -1,105 +1,5 @@
-$(document).ready( function(){
-	
-	if( $('#time').size() ){
-		var timeBoard = $('#time').FlipBoard({
-			dimensions: [10, 1],
-			text : '',
-			fontSize: 120,
-			alphabet : [ ':', 'a', 'p', 'm', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',  ],
-			skipAnimationThreshold: 2
-		});
-	
-	
-		var ti = setInterval( function(){
-			timeBoard.updateString( createDateString() );
-		}, 1000 );
-	}
-	
-	if( $('#twitter').size() ){
-		var twitterBoard = $('#twitter').FlipBoard({
-			dimensions : [22, 12],
-			text : '',
-			fontSize: 24,
-			alphabet : [
-				' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-				'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 
-				'.', '?', '!', '@', '#', ':', ',', '"', '\'', '/', ';', '(', ')', '%', '-', '–','&', '$', '_'
-			 ],
-			skipAnimationThreshold : 3,
-			lineDelay: 1000	
-		});
-
-		function getLatestMessage(){
-			$.getJSON( 'http://search.twitter.com/search.json?q=' + search + '&callback=?&rpp=1&lang=en', function( data ){
-				
-				var text = data.results[0].text.toUpperCase();
-				var name = data.results[0].from_user_name.toUpperCase();
-				
-				console.log( '"' + text + '" BY ' + name );
-				
-				twitterBoard.updateString( '"' + text + '" BY ' + name );
-			
-				clearInterval(ti);
-			
-				ti = setInterval( function(){
-					getLatestMessage();
-				}, 20000 );			
-			});
-		}
-
-		var search = '2012';
-		var ti;	
-	
-		getLatestMessage();
-	
-		$('#newSearch').click( function(){
-			search = $('#search').val();
-			getLatestMessage();
-		});
-	}
-		
-	// var board = $('#board').FlipBoard({
-	// 	dimensions : [28, 5],
-	// 	text : 'This is David Drew, co-founder of http://NoSweaters.com, verifying authenticity for deepshark.',
-	// 	fontSize: 30
-	// });
-	
-	function createDateString(){
-		var date = new Date();
-		
-		var tod = twentyFourToTwelve( date.getHours() );
-		var hours = tod.hour; 
-		var minutes = zeroFill( date.getMinutes() );
-		var seconds = zeroFill( date.getSeconds() );
-		
-		return hours + ':' + minutes + ':' + seconds + tod.tod;
-	}
-			
-	function zeroFill( num ){
-		if( num < 10 ){
-			return '0' + num;
-		} else {
-			return num;
-		}
-	}
-	
-	function twentyFourToTwelve( num ){
-		if( num > 12 ){
-			return {
-				hour : zeroFill( num - 12 ) + '',
-				tod : 'pm',
-			}
-		} else {
-			return {
-				hour : zeroFill( num ) + '',
-				tod : 'am'
-			}
-		}
-	}
-});
-
 (function($){
-	$.fn.FlipBoard = function( userOptions ){
+	$.fn.Flipper = function( userOptions ){
 		var options = {
 			dimensions : null, // * Board width x height in an array format: [10, 5] is equivalent to a 10w by 5h board.
 			alphabet : [ 
@@ -113,7 +13,11 @@ $(document).ready( function(){
 			callback : function(){},
 			align : 'center', // left, center and right
 			skipAnimationThreshold : 5,
-			lineDelay : 500
+			lineDelay : 500,
+			textOffset : {
+				h : 0,
+				v : 0
+			}
 		};
 		
 		$.extend( options, userOptions );
@@ -132,9 +36,9 @@ $(document).ready( function(){
 				var $panel = jQuery('<div class="flipper-container"><div class="pers-wrapper top"><div class="stationary-panel"><span></span></div><div class="panel"><span></span></div></div><div class="pers-wrapper bottom"><div class="stationary-panel"><span></span></div><div class="panel"><span></span></div></div></div>');
 				$row.append( $panel );
 				board[r].push('');
-				
+								
 				$panel.find('span').css({
-					fontSize : options.fontSize,
+					fontSize : options.fontSize
 				});
 				
 				$panel.find('.bottom span').css({
@@ -169,7 +73,12 @@ $(document).ready( function(){
 				
 				$panel.find('span').text(' ');
 
-				$panel.find('span').css('width', panelWidth);					
+				$panel.find('span').css('width', panelWidth);
+				
+				$panel.find('span').css({
+					top : ( options.textOffset.v >= 0 ) ? '+=' + options.textOffset.v + 'px' : '-=' + Math.abs( options.textOffset.v ) + 'px',
+					left : ( options.textOffset.h >= 0 ) ? '+=' + options.textOffset.h + 'px' : '-=' + Math.abs( options.textOffset.h ) + 'px'
+				});								
 			}
 		}
 					

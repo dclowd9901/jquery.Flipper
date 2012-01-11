@@ -236,6 +236,8 @@
 	position: relative;
 	text-align: center;
 	display: block;
+	top: 0px;
+	left: 0px;
 }
 
 .pers-wrapper {
