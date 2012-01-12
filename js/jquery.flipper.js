@@ -318,6 +318,7 @@
 		
 		tools.updateString( options.text );	
 		
+		// Need to figure out how to set an "all animations finished" callback.
 		$.when( this ).then( function(){
 			options.callback.apply();
 		});
