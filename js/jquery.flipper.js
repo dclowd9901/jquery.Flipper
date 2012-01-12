@@ -61,14 +61,14 @@
 					"-moz-border-radius-topleft" : bRadius + 'px',
 					"-moz-border-radius-topright" : bRadius + 'px',
 					"-webkit-border-radius" : bRadius + "px " + bRadius + "px 0 0",
-					"border-radius" : bRadius + "px " + bRadius + "px 0 0",
+					"border-radius" : bRadius + "px " + bRadius + "px 0 0"
 				});				
 
 				$panel.find('.bottom .panel, .bottom .stationary-panel').css({
 					"-moz-border-radius-bottomleft" : bRadius + 'px',
 					"-moz-border-radius-bottomright" : bRadius + 'px',
 					"-webkit-border-radius" : "0 0 " + bRadius + "px " + bRadius + "px",
-					"border-radius" : "0 0 " + bRadius + "px " + bRadius + "px",
+					"border-radius" : "0 0 " + bRadius + "px " + bRadius + "px"
 				});
 				
 				$panel.find('span').text(' ');
@@ -79,8 +79,8 @@
 					top : ( options.textOffset.v >= 0 ) ? '+=' + options.textOffset.v + 'px' : '-=' + Math.abs( options.textOffset.v ) + 'px',
 					left : ( options.textOffset.h >= 0 ) ? '+=' + options.textOffset.h + 'px' : '-=' + Math.abs( options.textOffset.h ) + 'px'
 				});								
-			}
-		}
+			};
+		};
 					
 		function getCurrentBoard(){
 			var $rows = $el.find('.panel-row');
@@ -101,7 +101,7 @@
 			});
 			
 			return currentBoard;
-		}
+		};
 		
 		function createNewBoard( str ){
 			var lineLength = options.dimensions[0];
@@ -116,19 +116,17 @@
 				var lineHasRoom = true;
 				
 				while( lineHasRoom ){
-					if( _.isString( strSplode[currentWordIndex] ) && strSplode[currentWordIndex].length <= thisLine ){
-						var wordAsArray = [];
-						
+					if( _.isString( strSplode[currentWordIndex] ) && strSplode[currentWordIndex].length <= thisLine ){						
 						for( charIndex in strSplode[currentWordIndex] ){
 							line.push( strSplode[currentWordIndex][charIndex] );
-						}
+						};
 												
 						thisLine -= strSplode[currentWordIndex].length;
 						
 						if( thisLine !== 0 ){
 							line.push(' ');
 							thisLine--;	
-						}
+						};
 						
 						currentWordIndex++;
 					} else if( thisLine !== 0 ){
@@ -136,14 +134,14 @@
 						thisLine--;	
 					} else {
 						lineHasRoom = false;
-					}
-				}
+					};
+				};
 				
 				newBoard.push( line );
-			}
+			};
 							
 			return newBoard;
-		}
+		};
 				
 		function panelChangeDispatch( toChange ){
 			var $panels = $el.find('.flipper-container');
@@ -162,23 +160,23 @@
 						delayFlipGo( $panel, current, to, delay );
 					} else {
 						flipGo( $panel, current, to );
-					}
-				}
+					};
+				};
 			};
-		}
+		};
 		
 		function delayFlipGo( $panel, current, to, delay ){
 			setTimeout( function(){
 				flipGo( $panel, current, to );
 			}, delay);			
-		}
+		};
 				
 		function flipGo( $panel, current, to ){
 			var direction = 1;
 			
 			if( current === to ){
 				direction = 0;
-			}
+			};
 												
 			switch( direction ){
 				case 0:
@@ -186,7 +184,7 @@
 				case 1:
 					var skipAnimation = doSkipAnimation( current, to, options.alphabet.length );
 					current = options.alphabet[ current + 1 ] ? current : -1;
-					var next = options.alphabet[ current + 1 ]					
+					var next = options.alphabet[ current + 1 ];				
 					var $def = $.Deferred();
 										
 					flipUp( next, $panel, skipAnimation, $def );
@@ -196,8 +194,8 @@
 						flipGo( $panel, current, to );
 					});							
 					break;
-			}
-		}
+			};
+		};
 		
 		function flipUp( next, $panel, skip, $def ){
 				
@@ -210,11 +208,11 @@
 				$topPanel.find('span').text( next );
 				$bottomPanel.find('span').text( next );				
 				$topSPanelSpan.text( next );
-				$bottomSPanelSpan.text( next )
+				$bottomSPanelSpan.text( next );
 				
 				setTimeout( function(){			
 					$def.resolve();
-				}, 50)
+				}, 50);
 				
 			} else {
 			
@@ -236,8 +234,8 @@
 				});
 			
 				$topPanel.addClass('topFlipDown');			
-			}
-		}
+			};
+		};
 		
 		function doSkipAnimation( currentIndex, toIndex, alphaLength ){			
 			if( currentIndex < toIndex ){
@@ -245,7 +243,7 @@
 					return false;
 				} else {
 					return true;
-				}
+				};
 			} else {
 				
 				var lengthToEnd = alphaLength - currentIndex;
@@ -254,9 +252,9 @@
 					return true;
 				} else {
 					return false;
-				}
-			}
-		}
+				};
+			};
+		};
 
 		function difference(template, override) {
 		    var ret = {};
@@ -266,14 +264,14 @@
 		                var diff = difference(template[name], override[name]);
 		                if (!_.isEmpty(diff)) {
 		                    ret[name] = diff;
-		                }
+		                };
 		            } else if (!_.isEqual(template[name], override[name])) {
 		                ret[name] = override[name];
-		            }
-		        }
-		    }
+		            };
+		        };
+		    };
 		    return ret;
-		}		
+		};		
 		
 		var tools = {
 			updateString : function( str ){
@@ -284,7 +282,7 @@
 				
 				for( i = 0; i < cBoard.length; i++ ){
 					differences.push( difference( cBoard[i], nBoard[i] ) );
-				}
+				};
 				
 				panelChangeDispatch( differences );
 			},
@@ -299,7 +297,7 @@
 							thisIndex = parseInt( this, 10 );
 						} else {
 							thisIndex = this;
-						}
+						};
 						 
 						
 						$el.find('.flipper-container').eq( thisIndex ).find('span').width( newWidth );
@@ -312,7 +310,7 @@
 					}
 					
 					$el.find('.flipper-container').eq( panelIndex ).find('span').width( newWidth );
-				}
+				};
 			}
 		};
 		
@@ -324,7 +322,7 @@
 		});
 						
 		return tools;
-	}
+	};
 })(jQuery);
 
 //     Underscore.js 1.3.0
