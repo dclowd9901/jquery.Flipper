@@ -1,0 +1,3 @@
+A "split-panel" style text renderer that utilizes jQuery and CSS.
+
+For now, see "js/demo.js" to see how it's implemented, and open "time.html" and "twitter.html" to see demonstrations of its usage.
