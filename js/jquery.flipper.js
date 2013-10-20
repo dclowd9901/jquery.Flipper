@@ -197,13 +197,16 @@
 				};
 			};
 		};
-		
+	
 		function delayFlipGo( $panel, current, to, delay ){
 			setTimeout( function(){
 				flipGo( $panel, current, to );
 			}, delay);			
 		};
-				
+		
+		/**
+		 * FIX: Certainly many optimizations that could be made here.
+		 */
 		function flipGo( $panel, current, to ){
 			var direction = 1;
 			
@@ -357,6 +360,12 @@
 		return tools;
 	};
 })(jQuery);
+
+/**
+ * FIX: Why include Underscore as a module with NPM when we could do it right in the code?
+ *      Brilliant! To be fair, I don't think they had AMD or CommonJS modulization back then
+ *      Besides, I'd probably use LoDash now.
+ */
 
 //     Underscore.js 1.3.0
 //     (c) 2009-2012 Jeremy Ashkenas, DocumentCloud Inc.
