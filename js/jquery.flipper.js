@@ -1,4 +1,17 @@
+/**
+ * 
+ * I wrote this thing in 2011, when I was just warming up my Javascript and 
+ * programming knowledge.
+ * 
+ * It is an embarrassment.
+ * 
+ * If you plan on forking this monstrosity, I've added notes on the things
+ * I would change in it, given the time or care.
+ * 
+ * */
+ 
 (function($){
+	// FIX: jQuery namespace? Why why why...
 	$.fn.Flipper = function( userOptions ){
 		var options = {
 			dimensions : null, // * Board width x height in an array format: [10, 5] is equivalent to a 10w by 5h board.
@@ -57,6 +70,9 @@
 				
 				bRadius = ( panelWidth * .1 );
 				
+				// FIX: This is ugly as fuck. Should be in a CSS file.
+				//      I think at the time, I thought I was killing
+				//      two birds with one stone.
 				$panel.find('.top .panel, .top .stationary-panel').css({
 					"-moz-border-radius-topleft" : bRadius + 'px',
 					"-moz-border-radius-topright" : bRadius + 'px',
@@ -81,7 +97,13 @@
 				});								
 			};
 		};
-					
+		
+		// FIX: That's right -- I made the DOM manage the state of the board.
+		//      It's not enough to just say that. For penance, I'm going to 
+		//      repeat it: I'm using the state of the displayed DOM as the 
+		//      source of truth for the board's state. That means whenever
+		//      I want to refer to or update that state, I have to literally
+		//      scan the DOM. So so so stupid.
 		function getCurrentBoard(){
 			var $rows = $el.find('.panel-row');
 			var currentBoard = [];
@@ -103,6 +125,14 @@
 			return currentBoard;
 		};
 		
+		/** 
+		 * FIX: While I'm proud of the idea behind this funciton, it's obviously
+		 * sorely misguided. I wanted a simple way to update the state. What better
+		 * API than handing off the string and letting the plugin do the rest.
+		 * Well, I forgot the part where I also break down the process into 
+		 * bite-size chunks, and that's what you see here. Not to mention, oh
+		 * 3 nested loops? I think that's a record for me.
+		 */
 		function createNewBoard( str ){
 			var lineLength = options.dimensions[0];
 			var lines = options.dimensions[1];
@@ -142,7 +172,10 @@
 							
 			return newBoard;
 		};
-				
+	
+		/**
+		 * FIX: MOAR LOOPZ!
+		 */
 		function panelChangeDispatch( toChange ){
 			var $panels = $el.find('.flipper-container');
 			
